@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsupplyBrsupply.Interface", "WebsupplyBrsupply.Interface\WebsupplyBrsupply.Interface.csproj", "{40F0B111-7729-44D1-916C-CC1A2413C93A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40F0B111-7729-44D1-916C-CC1A2413C93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F0B111-7729-44D1-916C-CC1A2413C93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F0B111-7729-44D1-916C-CC1A2413C93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F0B111-7729-44D1-916C-CC1A2413C93A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10377B35-8C2E-4DBB-BB2C-D9F8E643058A}
+	EndGlobalSection
+EndGlobal
