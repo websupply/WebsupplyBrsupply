@@ -10,13 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using WSComuns;
 
-namespace WebsupplyHHemo.Interface.Funcoes
+namespace WebsupplyBrsupply.Interface.Funcoes
 {
     public class Mod_Gerais
     {
         public static string strUsuario { get { return ""; } }
         public static string strSenha { get { return ""; } }
-        public static string strCGC { get { return "26398136000195"; } }
+        public static string strCGC { get { return "03746938000143"; } }
 
         public const string strErrorMessage = "O campo [{0}] deve conter entre {2} e {1} caracteres.";
         public const string strDateTimeMessage = "O campo [{0}] não é uma data válida.";
@@ -27,9 +27,9 @@ namespace WebsupplyHHemo.Interface.Funcoes
         {
             AssemblySettings settings = new AssemblySettings();
 #if DEBUG
-            return settings["appConexaoHHemoDev"].ToString();
+            return settings["appConexaoBrsupplyDev"].ToString();
 #else
-            return settings["appConexaoHhemoProd"].ToString();
+            return settings["appConexaoBrsupplyProd"].ToString();
 #endif
         }
 

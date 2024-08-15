@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebsupplyHHemo.Interface.Funcoes
+namespace WebsupplyBrsupply.Interface.Funcoes
 {
     public class Class_Servico
     {

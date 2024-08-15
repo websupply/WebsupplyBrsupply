@@ -9,13 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using WSComuns;
 
-namespace WebsupplyHHemo.Interface.Funcoes
+namespace WebsupplyBrsupply.Interface.Funcoes
 {
     public class Class_Log_Brsupply : Class_Log
     {
         #region Declaração dos Campos/Variáveis privados
 
-        private int _intCodEmpresa = 33;
+        private int _intCodEmpresa = 34;
         private string strIDTransacao { get; set; }
         private int intNumTransacao { get; set; }
         private int idServico { get; set; }

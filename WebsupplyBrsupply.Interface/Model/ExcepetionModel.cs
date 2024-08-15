@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebsupplyHHemo.Interface.Model
+namespace WebsupplyBrsupply.Interface.Model
 {
     public class ExcepetionModel
     {
