@@ -51,7 +51,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
                         _strCodAmbiente = "HOM";
                         break;
                     default:
-                        _strCodAmbiente = "DEV";
+                        _strCodAmbiente = "HOM";
                         break;
                 }
                 // if (strNomeMaquina.ToString().ToUpper() == "SRVWEB1" ||
@@ -74,7 +74,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
                 _ArrParam.Add(new Parametro("@cCodAmbiente", _strCodAmbiente.ToString(), SqlDbType.Char, 3, ParameterDirection.Input));
 
                 _ArrOut = new ArrayList();
-                DataTable _dtRetorno = _Conn.ExecuteStoredProcedure(new StoredProcedure("SP_WS_HHEMO_RECUPERA_ENDERECO", _ArrParam), ref _ArrOut).Tables[0];
+                DataTable _dtRetorno = _Conn.ExecuteStoredProcedure(new StoredProcedure("SP_WS_BRSUPPLY_RECUPERA_ENDERECO", _ArrParam), ref _ArrOut).Tables[0];
 
                 if (_dtRetorno != null)
                 {

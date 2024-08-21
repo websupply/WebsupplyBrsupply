@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using static WebsupplyBrsupply.Interface.Model.PedidoCatalogoModel;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace WebsupplyBrsupply.Interface.Metodos
 {
@@ -24,8 +25,8 @@ namespace WebsupplyBrsupply.Interface.Metodos
         public string strMensagem = string.Empty;
 
         // Paramêtros de Controle da Classe
-        public int intCodPedComWebsupply = 0;
-        public string strCodPedComProtheus = string.Empty;
+        public int intCodPedCatWebsupply = 0;
+        public string strCodPedCatBrSupply = string.Empty;
 
         private static int intNumTransacao
         {
@@ -53,7 +54,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 // Gera Log
                 objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                  0, 0, "", null, "Inicio do Método " + Mod_Gerais.MethodName(),
-                                 "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                 "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                 objLog.GravaLog();
                 objLog = null;
 
@@ -63,7 +64,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 {
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                        1, -1, "", null, "Erro ao recuperar dados do serviço",
-                                                       "", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                                       "", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                     objLog.GravaLog();
                     objLog = null;
                     strMensagem = "Erro ao recuperar dados do serviço";
@@ -78,10 +79,10 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 // Cria o Parametro da query do banco
                 ArrayList arrParam = new ArrayList();
 
-                arrParam.Add(new Parametro("@iCdgPed", intCodPedComWebsupply, SqlDbType.Int, 4, ParameterDirection.Input));
+                arrParam.Add(new Parametro("@iCDGPED", intCodPedCatWebsupply, SqlDbType.Int, 4, ParameterDirection.Input));
 
                 ArrayList arrOut = new ArrayList();
-                DataTable DadosPedidoCatalogo = conn.ExecuteStoredProcedure(new StoredProcedure("[Procedure para Pegar o Cabeçalho]", arrParam), ref arrOut).Tables[0];
+                DataTable DadosPedidoCatalogo = conn.ExecuteStoredProcedure(new StoredProcedure("SP_WS_BRSUPPLY_PEDIDO_CATALOGO_SEL", arrParam), ref arrOut).Tables[0];
 
                 // Encerra a Conexão com Banco de Dados
                 conn.Dispose();
@@ -93,10 +94,10 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     {
                         info = new PedidoCatalogoModel.Info
                         {
-                            NomeRemetente = DadosPedidoCatalogo.Rows[0]["nome-rementente"].ToString().Trim(),
-                            NomeDestinatario = DadosPedidoCatalogo.Rows[0]["nome-destinatario"].ToString().Trim(),
-                            Key = DadosPedidoCatalogo.Rows[0]["key"].ToString().Trim(),
-                            Auth = DadosPedidoCatalogo.Rows[0]["auth"].ToString().Trim()
+                            NomeRemetente = "GrupoPulsa",
+                            NomeDestinatario = "BR SUPPLY",
+                            Key = objServico.strSenha,
+                            Auth = objServico.strUsuario
                         },
                         detPedidos = new PedidoCatalogoModel.DetPedidos
                         {
@@ -122,10 +123,10 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Cria o Parametro da query do banco
                     arrParam = new ArrayList();
 
-                    arrParam.Add(new Parametro("@iCdgPed", intCodPedComWebsupply, SqlDbType.Int, 4, ParameterDirection.Input));
+                    arrParam.Add(new Parametro("@iCDGPED", intCodPedCatWebsupply, SqlDbType.Int, 4, ParameterDirection.Input));
 
                     arrOut = new ArrayList();
-                    DataTable DadosItens = conn.ExecuteStoredProcedure(new StoredProcedure("[Procedure para pegar os itens do Pedido]", arrParam), ref arrOut).Tables[0];
+                    DataTable DadosItens = conn.ExecuteStoredProcedure(new StoredProcedure("SP_WS_BRSUPPLY_PEDIDO_CATALOGO_ITENS_SEL", arrParam), ref arrOut).Tables[0];
 
                     // Encerra a Conexão com Banco de Dados
                     conn.Dispose();
@@ -157,12 +158,12 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     else
                     {
                         // Define a mensagem de erro
-                        strMensagem = $"Não foi possível realizar a operação, pois não foi retornando nenhum item associado ao Pedido Nº {intCodPedComWebsupply}";
+                        strMensagem = $"Não foi possível realizar a operação, pois não foi retornando nenhum item associado ao Pedido Nº {intCodPedCatWebsupply}";
 
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                         objLog.GravaLog();
                         objLog = null;
 
@@ -172,11 +173,33 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Serializa o objeto para XML
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(PedidoCatalogoModel.PedidoCatalogo));
                     string xmlRequestBody;
-                    using (var stringWriter = new StringWriter())
+
+                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("", ""); // Remove os namespaces
+
+                    using (var memoryStream = new MemoryStream())
                     {
-                        xmlSerializer.Serialize(stringWriter, pedidoCatalogo);
-                        xmlRequestBody = stringWriter.ToString();
+                        using (var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false)))
+                        {
+                            XmlWriterSettings settings = new XmlWriterSettings
+                            {
+                                Indent = true,
+                                Encoding = Encoding.UTF8,
+                                OmitXmlDeclaration = true // Remove a declaração XML
+                            };
+
+                            using (XmlWriter xmlWriter = XmlWriter.Create(streamWriter, settings))
+                            {
+                                xmlSerializer.Serialize(xmlWriter, pedidoCatalogo, ns);
+                            }
+                        }
+
+                        xmlRequestBody = Encoding.UTF8.GetString(memoryStream.ToArray());
                     }
+
+                    // Adiciona manualmente a declaração XML
+                    string xmlDeclaration = "<?xml version=\"1.0\"?>\r\n";
+                    xmlRequestBody = xmlDeclaration + xmlRequestBody;
 
                     // Atualiza o Identificador
                     strIdentificador = "Cad" + strIdentificador;
@@ -184,7 +207,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                     "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                     objLog.GravaLog();
                     objLog = null;
 
@@ -208,7 +231,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log com o retorno da API
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                     "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                     objLog.GravaLog();
                     objLog = null;
 
@@ -216,82 +239,42 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     {
                         response.EnsureSuccessStatusCode();
 
-                        // Trata o Retorno e aloca no objeto
-                        JArray retornoAPI = JArray.Parse(responseBody);
+                        // Desserializa a resposta XML
+                        XmlSerializer serializer = new XmlSerializer(typeof(RetornoAPIModel.PedidoCatalogo.Arquivo));
+                        RetornoAPIModel.PedidoCatalogo.Arquivo retornoAPI;
 
-                        // Verifica se tem retorno
-                        if (retornoAPI.Count > 0)
+                        using (StringReader reader = new StringReader(responseBody))
                         {
-                            // Percorre Todos os Resultados
-                            for (int i = 0; i < retornoAPI.Count; i++)
-                            {
-                                // Pega a Linha do Retorno
-                                JObject linhaRetorno = JObject.Parse(retornoAPI[i].ToString());
-
-                                // Instância a model de controle do retorno da API
-                                RetornoAPIModel retornoAPIModel = new RetornoAPIModel
-                                {
-                                    C_STATUS = linhaRetorno["C_STATUS"].ToString().Trim(),
-                                    N_STATUS = (int)linhaRetorno["N_STATUS"]
-                                };
-
-                                // Verifica se retornou erro do protheus
-                                // N_STATUS": 1 = Sucesso / 0 = Erro
-                                if (retornoAPIModel.N_STATUS != 1)
-                                {
-                                    strMensagem = retornoAPIModel.C_STATUS;
-
-                                    // Gera Log com o retorno da API
-                                    objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                                     0, (int)response.StatusCode, retornoAPIModel, null, "Erro no Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                                     "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
-                                    objLog.GravaLog();
-                                    objLog = null;
-
-                                    return false;
-                                }
-
-                                // Sincroniza o Retorno da API com os Parametros
-                                strCodPedComProtheus = linhaRetorno["C7_NUM"].ToString().Trim();
-
-                                // Valida se algum dos códigos retornou vázio
-                                // caso sim, devolve erro
-                                if (strCodPedComProtheus == String.Empty)
-                                {
-                                    strMensagem = $"Ocorreu um erro na chamada da aplicação - [{linhaRetorno["C_STATUS"].ToString().Trim()}] - C7_NUM [{strCodPedComProtheus}]";
-
-                                    return false;
-                                }
-
-                                // Caso o Pedido não tenha código do protheus, armazena essa informação no banco
-                                if (pedidoCompra.C7_NUM == String.Empty)
-                                {
-                                    // Realiza a Chamada do Banco
-                                    conn = new Conexao(Mod_Gerais.ConnectionString());
-
-                                    // Cria o Parametro da query do banco
-                                    ArrayList arrParam2 = new ArrayList();
-
-                                    arrParam2.Add(new Parametro("@iCdgPed", intCodPedComWebsupply, SqlDbType.Int, 4, ParameterDirection.Input));
-                                    arrParam2.Add(new Parametro("@vNumPedInt", strCodPedComProtheus, SqlDbType.Char, 15, ParameterDirection.Input));
-
-                                    ArrayList arrOut2 = new ArrayList();
-
-                                    conn.ExecuteStoredProcedure(new StoredProcedure("SP_HHemo_WS_Pedido_Compras_NumPedInt_UPD", arrParam2), ref arrOut2);
-
-                                    // Encerra a Conexão com Banco de Dados
-                                    conn.Dispose();
-                                }
-                            }
+                            retornoAPI = (RetornoAPIModel.PedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                         }
 
+                        // Verifica se retornou erro
+                        if(retornoAPI.processamento.pedido.Status.ToUpper() == "ERRO")
+                        {
+                            // Define a mensagem de erro
+                            strMensagem = retornoAPI.processamento.pedido.Mensagem;
+
+                            // Gera Log
+                            objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
+                                             0, (int)response.StatusCode, "", null, strMensagem,
+                                             "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                            objLog.GravaLog();
+                            objLog = null;
+
+                            return false;
+                        }
+
+                        // Seta os Parametros recebidos pela Interface
+                        strMensagem = retornoAPI.processamento.pedido.Mensagem;
+                        strCodPedCatBrSupply = retornoAPI.processamento.pedido.Transacao;
+
                         // Define a mensagem de sucesso
-                        strMensagem = $"Pedido Nº {intCodPedComWebsupply} do codigo [{(strCodPedComProtheus != String.Empty ? strCodPedComProtheus : pedidoCompra.C7_NUM)}] {(pedidoCompra.C7_NUM != String.Empty ? "atualizado(a)" : "cadastrado(a)")} com sucesso.";
+                        strMensagem = $"Pedido Nº {intCodPedCatWebsupply} do codigo [{strCodPedCatBrSupply}] cadastrado(a) com sucesso.";
 
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                         objLog.GravaLog();
                         objLog = null;
 
@@ -306,7 +289,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, (int)response.StatusCode, "", null, strMensagem,
-                                         "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                         objLog.GravaLog();
                         objLog = null;
 
@@ -316,12 +299,12 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 else
                 {
                     // Define a mensagem de erro
-                    strMensagem = $"Não foi possível realizar a operação, pois não foi retornando nenhum dado referente ao Pedido Nº {intCodPedComWebsupply}";
+                    strMensagem = $"Não foi possível realizar a operação, pois não foi retornando nenhum dado referente ao Pedido Nº {intCodPedCatWebsupply}";
 
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, "", null, strMensagem,
-                                     "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                     "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                     objLog.GravaLog();
                     objLog = null;
 
@@ -337,9 +320,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 strMensagem = excepetionEstruturada.Mensagem;
 
                 // Gera Log
-                objLog = new Class_Log_Hhemo(strIdentificador, intNumTransacao, _intNumServico,
+                objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                  1, -1, JsonConvert.SerializeObject(excepetionEstruturada), null, strMensagem,
-                                 "L", intCodPedComWebsupply.ToString(), "", Mod_Gerais.MethodName());
+                                 "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
                 objLog.GravaLog();
                 objLog = null;
 

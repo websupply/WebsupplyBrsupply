@@ -27,7 +27,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         {
             AssemblySettings settings = new AssemblySettings();
 #if DEBUG
-            return settings["appConexaoBrsupplyDev"].ToString();
+            return settings["appConexaoBrsupplyHom"].ToString();
 #else
             return settings["appConexaoBrsupplyProd"].ToString();
 #endif
