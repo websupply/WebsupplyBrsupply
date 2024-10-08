@@ -10,7 +10,7 @@ namespace WebsupplyBrsupply.Interface.Model
     public class RetornoAPIModel
     {
         // Gerencia o Retorno da Interface de Pedido de Catalogo
-        public class PedidoCatalogo
+        public class CadastraPedidoCatalogo
         {
             // XML Completo
             [XmlRoot("arquivo")]
@@ -20,7 +20,7 @@ namespace WebsupplyBrsupply.Interface.Model
                 public Info info { get; set; }
 
                 [XmlElement("processamento")]
-                public Processamento processamento { get; set; }
+                public Processamento processamento { get; set; } = new Processamento();
 
                 [XmlElement("data")]
                 public string Data { get; set; }
@@ -48,7 +48,7 @@ namespace WebsupplyBrsupply.Interface.Model
             public class Processamento
             {
                 [XmlElement("pedido")]
-                public Pedido pedido { get; set; }
+                public Pedido pedido { get; set; } = new Pedido();
             }
 
             public class Pedido
@@ -67,6 +67,24 @@ namespace WebsupplyBrsupply.Interface.Model
 
                 [XmlElement("transacao")]
                 public string Transacao { get; set; }
+            }
+        }
+
+        // Gerencia o Retorno da Interface de Pedido de Catalogo
+        public class CancelamentoPedidoCatalogo
+        {
+            // XML Completo
+            [XmlRoot("arquivo")]
+            public class Arquivo
+            {
+                [XmlElement("data")]
+                public string Data { get; set; }
+
+                [XmlElement("status")]
+                public string Status { get; set; }
+
+                [XmlElement("mensagem")]
+                public string Mensagem { get; set; }
             }
         }
     }
