@@ -659,9 +659,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     { _intNumTransacao -= 1; }
 
                     // Estrutura a Model
-                    PedidoCatalogoModel.CancelamentoPedido.Arquivo pedidoCatalogo = new PedidoCatalogoModel.CancelamentoPedido.Arquivo
+                    PedidoCatalogoModel.ConsultaPedido.Arquivo pedidoCatalogo = new PedidoCatalogoModel.ConsultaPedido.Arquivo
                     {
-                        info = new PedidoCatalogoModel.CancelamentoPedido.Info
+                        info = new PedidoCatalogoModel.ConsultaPedido.Info
                         {
                             NomeRemetente = "GrupoPulsa",
                             NomeDestinatario = "BR SUPPLY",
@@ -704,24 +704,8 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         return false;
                     }
 
-                    // Verifica se o motivo foi preenchido
-                    if (pedidoCatalogo.info.Motivo == null || pedidoCatalogo.info.Motivo == string.Empty)
-                    {
-                        // Define a mensagem de erro
-                        strMensagem = $"Não foi possível realizar a operação, pois não foi especificado o Motivo do cancelamento.";
-
-                        // Gera Log
-                        objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                         0, 0, "", null, strMensagem,
-                                         "L", strCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName());
-                        objLog.GravaLog();
-                        objLog = null;
-
-                        return false;
-                    }
-
                     // Serializa o objeto para XML
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(PedidoCatalogoModel.CancelamentoPedido.Arquivo));
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(PedidoCatalogoModel.ConsultaPedido.Arquivo));
                     string xmlRequestBody;
 
                     XmlSerializerNamespaces ns = new XmlSerializerNamespaces();

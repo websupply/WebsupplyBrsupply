@@ -27,5 +27,17 @@ namespace WebsupplyBrsupply.Teste
             Console.WriteLine(pedidoCatalogo.Executar());
             Console.WriteLine(pedidoCatalogo.strMensagem);
         }
+
+        [TestMethod]
+        public void InterfaceConsultarPedidoCatalogo()
+        {
+            PedidoCatalogoMetodo.ConsultaPedido pedidoCatalogo = new PedidoCatalogoMetodo.ConsultaPedido();
+
+            pedidoCatalogo.strCodPedCatWebsupply = "20900340";
+
+            Console.WriteLine(pedidoCatalogo.Executar());
+            Console.WriteLine(pedidoCatalogo.strMensagem);
+            Console.WriteLine(pedidoCatalogo.objRetornoWS);
+        }
     }
 }
