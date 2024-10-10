@@ -5,6 +5,7 @@ namespace WebsupplyBrsupply.Interface.Model
 {
     public class PedidoCatalogoModel
     {
+        // Gerencia a Request da Interface de Cadastro de Pedido de Catalogo
         public class CadastroPedido
         {
             // XML Completo
@@ -92,6 +93,7 @@ namespace WebsupplyBrsupply.Interface.Model
             }
         }
 
+        // Gerencia a Request da Interface de Cadastro de Pedido de Catalogo
         public class CancelamentoPedido
         {
             // XML Completo
@@ -125,6 +127,40 @@ namespace WebsupplyBrsupply.Interface.Model
 
                 [XmlElement("motivo")]
                 public string Motivo { get; set; }
+            }
+        }
+
+        // Gerencia a Request da Interface de Cadastro de Pedido de Catalogo
+        public class ConsultaPedido
+        {
+            // XML Completo
+            [XmlRoot("arquivo")]
+            public class Arquivo
+            {
+                [XmlElement("info")]
+                public Info info { get; set; }
+            }
+
+            // Estrutura de Classes do XML
+            public class Info
+            {
+                [XmlElement("nome-remetente")]
+                public string NomeRemetente { get; set; }
+
+                [XmlElement("nome-destinatario")]
+                public string NomeDestinatario { get; set; }
+
+                [XmlElement("key")]
+                public string Key { get; set; }
+
+                [XmlElement("auth")]
+                public string Auth { get; set; }
+
+                [XmlElement("pedido", IsNullable = false)]
+                public string Pedido { get; set; }
+
+                [XmlElement("ordem-compra", IsNullable = false)]
+                public string OrdemCompra { get; set; }
             }
         }
     }
