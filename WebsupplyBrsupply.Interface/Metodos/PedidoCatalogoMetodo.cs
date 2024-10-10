@@ -28,6 +28,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
             // Paramêtros de Controle da Classe
             public int intCodPedCatWebsupply = 0;
             public string strCodPedCatBrSupply = string.Empty;
+            public string strRetornoWS = string.Empty;
 
             private static int intNumTransacao
             {
@@ -249,6 +250,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                                 retornoAPI = (RetornoAPIModel.CadastraPedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                             }
 
+                            // Aplica o Retorno da API no objeto publico
+                            strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
+
                             // Verifica se retornou erro
                             if (retornoAPI.processamento.pedido.Status.ToUpper() == "ERRO")
                             {
@@ -345,6 +349,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
             public string strCodPedCatWebsupply = string.Empty;
             public string strCodPedCatBrSupply = string.Empty;
             public string strMotivoCancelamento = string.Empty;
+            public string strRetornoWS = string.Empty;
 
             private static int intNumTransacao
             {
@@ -532,6 +537,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             retornoAPI = (RetornoAPIModel.CancelamentoPedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                         }
 
+                        // Aplica o Retorno da API no objeto publico
+                        strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
+
                         // Verifica se retornou erro
                         if (retornoAPI.Status.ToUpper() == "ERRO")
                         {
@@ -611,7 +619,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
             // Paramêtros de Controle da Classe
             public string strCodPedCatWebsupply = string.Empty;
             public string strCodPedCatBrSupply = string.Empty;
-            public RetornoAPIModel.ConsultaPedidoCatalogo.Arquivo objRetornoWS = new RetornoAPIModel.ConsultaPedidoCatalogo.Arquivo();
+            public string strRetornoWS = string.Empty;
 
             private static int intNumTransacao
             {
@@ -783,7 +791,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         }
 
                         // Aplica o Retorno da API no objeto publico
-                        objRetornoWS = retornoAPI;
+                        strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
 
                         // Verifica se retornou erro
                         if (retornoAPI.Status.ToUpper() == "ERRO")

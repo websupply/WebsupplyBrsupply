@@ -14,6 +14,7 @@ namespace WebsupplyBrsupply.Teste
 
             Console.WriteLine(pedidoCatalogo.Executar());
             Console.WriteLine(pedidoCatalogo.strMensagem);
+            Console.WriteLine(pedidoCatalogo.strRetornoWS);
         }
 
         [TestMethod]
@@ -26,6 +27,7 @@ namespace WebsupplyBrsupply.Teste
 
             Console.WriteLine(pedidoCatalogo.Executar());
             Console.WriteLine(pedidoCatalogo.strMensagem);
+            Console.WriteLine(pedidoCatalogo.strRetornoWS);
         }
 
         [TestMethod]
@@ -37,7 +39,7 @@ namespace WebsupplyBrsupply.Teste
 
             Console.WriteLine(pedidoCatalogo.Executar());
             Console.WriteLine(pedidoCatalogo.strMensagem);
-            Console.WriteLine(pedidoCatalogo.objRetornoWS);
+            Console.WriteLine(pedidoCatalogo.strRetornoWS);
         }
     }
 }
