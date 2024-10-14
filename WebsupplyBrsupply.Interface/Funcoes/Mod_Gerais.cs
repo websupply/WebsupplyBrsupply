@@ -23,14 +23,34 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         public const string strRequiredMessage = "O campo [{0}] deve ser preenchido.";
         public const string strMaxErrorMessage = "O campo [{0}] pode ter no máximo {1} caracteres.";
 
-        public static string ConnectionString()
+        public static string ConnectionString(string? Ambiente = null)
         {
             AssemblySettings settings = new AssemblySettings();
-#if DEBUG
-            return settings["appConexaoBrsupplyHom"].ToString();
-#else
-            return settings["appConexaoBrsupplyProd"].ToString();
-#endif
+
+            return Ambiente switch
+            {
+                "PRD" => settings["appConexaoInterfaceProd"].ToString(),
+                "PRE" => settings["appConexaoInterfacePre"].ToString(),
+                "HOM" => settings["appConexaoInterfaceHom"].ToString(),
+                "DEV" => settings["appConexaoInterfaceDev"].ToString(),
+                _ => settings["appConexaoInterfaceDev"].ToString()
+            };
+        }
+
+        public static string RetornaAmbiente()
+        {
+            string strNomeMaquina = Environment.MachineName;
+
+            return strNomeMaquina switch
+            {
+                "SRVWEB1" => "PRD",
+                "SRVWEB1N" => "PRD",
+                "SRVWEB2" => "PRD",
+                "SRVWEB2N" => "PRD",
+                "SRVWEBPREPRD" => "PRE",
+                "SRVHOMOLOG" => "HOM",
+                _ => "DEV",
+            };
         }
 
         public static string MethodName()

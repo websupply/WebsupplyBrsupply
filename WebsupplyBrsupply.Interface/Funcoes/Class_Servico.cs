@@ -33,27 +33,28 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         {
             if (_strCodAmbiente == "")
             {
-                string strNomeMaquina = Environment.MachineName;
-                switch (strNomeMaquina.ToString().ToUpper())
-                {
-                    case "SRVWEB1":
-                    case "SRVWEB1N":
-                        _strCodAmbiente = "PRD";
-                        break;
-                    case "SRVWEB2":
-                    case "SRVWEB2N":
-                        _strCodAmbiente = "PRD";
-                        break;
-                    case "SRVWEBPREPRD":
-                        _strCodAmbiente = "PRE";
-                        break;
-                    case "SRVHOMOLOG":
-                        _strCodAmbiente = "HOM";
-                        break;
-                    default:
-                        _strCodAmbiente = "HOM";
-                        break;
-                }
+                _strCodAmbiente = Mod_Gerais.RetornaAmbiente();
+                //string strNomeMaquina = Environment.MachineName;
+                //switch (strNomeMaquina.ToString().ToUpper())
+                //{
+                //    case "SRVWEB1":
+                //    case "SRVWEB1N":
+                //        _strCodAmbiente = "PRD";
+                //        break;
+                //    case "SRVWEB2":
+                //    case "SRVWEB2N":
+                //        _strCodAmbiente = "PRD";
+                //        break;
+                //    case "SRVWEBPREPRD":
+                //        _strCodAmbiente = "PRE";
+                //        break;
+                //    case "SRVHOMOLOG":
+                //        _strCodAmbiente = "HOM";
+                //        break;
+                //    default:
+                //        _strCodAmbiente = "DEV";
+                //        break;
+                //}
                 // if (strNomeMaquina.ToString().ToUpper() == "SRVWEB1" ||
                 //     strNomeMaquina.ToString().ToUpper() == "SRVWEB2")
                 // {
