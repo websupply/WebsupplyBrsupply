@@ -27,6 +27,8 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         {
             AssemblySettings settings = new AssemblySettings();
 
+            Ambiente = Ambiente == null ? RetornaAmbiente() : Ambiente;
+
             return Ambiente switch
             {
                 "PRD" => settings["appConexaoInterfaceProd"].ToString(),
