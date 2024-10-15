@@ -25,6 +25,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         private string strLocalOrigem { get; set; }
         private string strMetodoOrigem { get; set; }
         private Class_MensagemRetorno.Class_Erros[] arrDetalhe { get; set; }
+        private string strAmbiente { get; set; }
 
         public string strErroRetorno { get; set; }
 
@@ -34,7 +35,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         #endregion
 
         public Class_Log_Brsupply(string _strIdentificador, int _intNumTransacao, int _intIdServico, int _intIDErro, int _Status, object _strConteudoSoap, Class_MensagemRetorno.Class_Erros[] _arrDetalhe, string _strDados,
-                        string _strLocalOrigem, string _strChaveLocal, string _strChaveRemoto, string _strMetodoOrigem)
+                        string _strLocalOrigem, string _strChaveLocal, string _strChaveRemoto, string _strMetodoOrigem, string? _strAmbiente = null)
         {
             strIDTransacao = _strIdentificador;
             intNumTransacao = _intNumTransacao;
@@ -51,11 +52,12 @@ namespace WebsupplyBrsupply.Interface.Funcoes
             strChaveLocal = _strChaveLocal;
             strChaveRemoto = _strChaveRemoto;
             intCodEmpresa = _intCodEmpresa;
+            strAmbiente = _strAmbiente;
         }
 
         public void GravaLog()
         {
-            Conexao _Conn = new Conexao(Mod_Gerais.ConnectionString());
+            Conexao _Conn = new Conexao(Mod_Gerais.ConnectionString(strAmbiente));
             try
             {
                 _ArrParam = new ArrayList();
