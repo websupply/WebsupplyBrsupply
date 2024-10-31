@@ -23,19 +23,18 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         public const string strRequiredMessage = "O campo [{0}] deve ser preenchido.";
         public const string strMaxErrorMessage = "O campo [{0}] pode ter no máximo {1} caracteres.";
 
-        public static string ConnectionString(string? Ambiente = null)
+        public static string ConnectionString(string Ambiente = null)
         {
             AssemblySettings settings = new AssemblySettings();
 
             Ambiente = Ambiente == null ? RetornaAmbiente() : Ambiente;
 
-            return Ambiente switch
+            switch (Ambiente)
             {
-                "PRD" => settings["appConexaoInterfaceProd"].ToString(),
-                "PRE" => settings["appConexaoInterfacePre"].ToString(),
-                "HOM" => settings["appConexaoInterfaceHom"].ToString(),
-                "DEV" => settings["appConexaoInterfaceDev"].ToString(),
-                _ => settings["appConexaoInterfaceDev"].ToString()
+                case "PRD": return settings["appConexaoInterfaceProd"].ToString();
+                case "PRE": return settings["appConexaoInterfacePre"].ToString();
+                case "HOM": return settings["appConexaoInterfaceHom"].ToString();
+                default: return settings["appConexaoInterfaceDev"].ToString();
             };
         }
 
@@ -43,15 +42,15 @@ namespace WebsupplyBrsupply.Interface.Funcoes
         {
             string strNomeMaquina = Environment.MachineName;
 
-            return strNomeMaquina switch
+            switch (strNomeMaquina)
             {
-                "SRVWEB1" => "PRD",
-                "SRVWEB1N" => "PRD",
-                "SRVWEB2" => "PRD",
-                "SRVWEB2N" => "PRD",
-                "SRVWEBPREPRD" => "PRE",
-                "SRVHOMOLOG" => "HOM",
-                _ => "DEV",
+                case "SRVWEB1": return "PRD";
+                case "SRVWEB1N": return "PRD";
+                case "SRVWEB2": return "PRD";
+                case "SRVWEB2N": return "PRD";
+                case "SRVWEBPREPRD": return "PRE";
+                case "SRVHOMOLOG": return "HOM";
+                default: return "DEV";
             };
         }
 

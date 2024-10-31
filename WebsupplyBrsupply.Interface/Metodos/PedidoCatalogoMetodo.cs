@@ -12,11 +12,16 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace WebsupplyBrsupply.Interface.Metodos
 {
+    [ComVisible(true)]
     public class PedidoCatalogoMetodo
     {
+        [ComVisible(true)]
+        [ProgId("WebsupplyBrsupply.Interface.Metodos.PedidoCatalogoMetodo.CadastraPedido")]
         public class CadastraPedido
         {
             static int _intNumTransacao = 0;
@@ -337,7 +342,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 }
             }
         }
-        
+
+        [ComVisible(true)]
+        [ProgId("WebsupplyBrsupply.Interface.Metodos.PedidoCatalogoMetodo.CancelaPedido")]
         public class CancelaPedido
         {
             static int _intNumTransacao = 0;
@@ -610,6 +617,8 @@ namespace WebsupplyBrsupply.Interface.Metodos
             }
         }
 
+        [ComVisible(true)]
+        [ProgId("WebsupplyBrsupply.Interface.Metodos.PedidoCatalogoMetodo.ConsultaPedido")]
         public class ConsultaPedido
         {
             static int _intNumTransacao = 0;

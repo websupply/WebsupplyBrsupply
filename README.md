@@ -10,6 +10,12 @@ Interface de Integração BRSupply
 - [Microsoft.System.Configuration.ConfigurationManager](https://www.nuget.org/packages/System.Configuration.ConfigurationManager/8.0.0) - Provides types that support using XML configuration files (app.config). This package exists only to support migrating existing .NET Framework code that already uses System.Configuration. When writing new code, use another configuration system instead, such as Microsoft.Extensions.Configuration.
 - [Microsoft.Data.SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/2.1.4) - Provides the data provider for SQL Server. These classes provide access to versions of SQL Server and encapsulate database-specific protocols, including tabular data stream (TDS)
 
+## Nuget de Referências do Projeto - WebsupplyBrsupply.HotFix (Projeto Necessário para Evitar Perda de Referência devido ao bug legado do WSComuns e SgiConnection)
+
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/13.0.3) - Json.NET is a popular high-performance JSON framework for .NET
+- [Microsoft.System.Configuration.ConfigurationManager](https://www.nuget.org/packages/System.Configuration.ConfigurationManager/8.0.0) - Provides types that support using XML configuration files (app.config). This package exists only to support migrating existing .NET Framework code that already uses System.Configuration. When writing new code, use another configuration system instead, such as Microsoft.Extensions.Configuration.
+- [Microsoft.Data.SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/2.1.4) - Provides the data provider for SQL Server. These classes provide access to versions of SQL Server and encapsulate database-specific protocols, including tabular data stream (TDS)
+
 ## Componentes COM
 
 - **WSComuns.dll**: Componente responsável por funções comuns do Sistema.
