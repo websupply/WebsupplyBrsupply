@@ -468,20 +468,20 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     }
 
                     // Verifica se o motivo foi preenchido
-                    if(pedidoCatalogo.info.Motivo == null || pedidoCatalogo.info.Motivo == string.Empty)
-                    {
-                        // Define a mensagem de erro
-                        strMensagem = $"Não foi possível realizar a operação, pois não foi especificado o Motivo do cancelamento.";
+                    //if(pedidoCatalogo.info.Motivo == null || pedidoCatalogo.info.Motivo == string.Empty)
+                    //{
+                    //    // Define a mensagem de erro
+                    //    strMensagem = $"Não foi possível realizar a operação, pois não foi especificado o Motivo do cancelamento.";
 
-                        // Gera Log
-                        objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                         0, 0, "", null, strMensagem,
-                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
-                        objLog.GravaLog();
-                        objLog = null;
+                    //    // Gera Log
+                    //    objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
+                    //                     0, 0, "", null, strMensagem,
+                    //                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
+                    //    objLog.GravaLog();
+                    //    objLog = null;
 
-                        return false;
-                    }
+                    //    return false;
+                    //}
 
                     // Serializa o objeto para XML
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(PedidoCatalogoModel.CancelamentoPedido.Arquivo));
