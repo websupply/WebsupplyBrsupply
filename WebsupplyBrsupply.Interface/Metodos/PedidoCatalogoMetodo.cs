@@ -26,7 +26,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
         {
             static int _intNumTransacao = 0;
             static int _intNumServico = 1;
-            string strIdentificador = "CadPedCat" + Mod_Gerais.RetornaIdentificador();
+            string strIdentificador = "Cad" + Mod_Gerais.RetornaIdentificador();
 
             public string strMensagem = string.Empty;
 
@@ -353,7 +353,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
         {
             static int _intNumTransacao = 0;
             static int _intNumServico = 2;
-            string strIdentificador = "CancPedCat" + Mod_Gerais.RetornaIdentificador();
+            string strIdentificador = "Cance" + Mod_Gerais.RetornaIdentificador();
 
             public string strMensagem = string.Empty;
 
@@ -631,7 +631,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
         {
             static int _intNumTransacao = 0;
             static int _intNumServico = 3;
-            string strIdentificador = "ConsPedCat" + Mod_Gerais.RetornaIdentificador();
+            string strIdentificador = "Cons" + Mod_Gerais.RetornaIdentificador();
 
             public string strMensagem = string.Empty;
 
