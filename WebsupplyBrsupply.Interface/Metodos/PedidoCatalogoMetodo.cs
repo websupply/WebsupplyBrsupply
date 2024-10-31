@@ -218,7 +218,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                         0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                         0, 0, pedidoCatalogo, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                          "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
@@ -242,7 +242,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                         // Gera Log com o retorno da API
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                         0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                         0, (int)response.StatusCode, "", null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                          "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
@@ -259,6 +259,13 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             {
                                 retornoAPI = (RetornoAPIModel.CadastraPedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                             }
+
+                            // Gera Log com o retorno da API
+                            objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
+                                             0, (int)response.StatusCode, retornoAPI, null, "Retorno da Chamada a API Rest Serializado - Método " + Mod_Gerais.MethodName(),
+                                             "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
+                            objLog.GravaLog();
+                            objLog = null;
 
                             // Aplica o Retorno da API no objeto publico
                             strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
@@ -512,7 +519,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                     0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                     0, 0, pedidoCatalogo, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                      "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
@@ -536,7 +543,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                     // Gera Log com o retorno da API
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                     0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                     0, (int)response.StatusCode, "", null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                      "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
@@ -553,6 +560,13 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         {
                             retornoAPI = (RetornoAPIModel.CancelamentoPedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                         }
+
+                        // Gera Log com o retorno da API
+                        objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
+                                         0, (int)response.StatusCode, retornoAPI, null, "Retorno da Chamada a API Rest Serializado - Método " + Mod_Gerais.MethodName(),
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
+                        objLog.GravaLog();
+                        objLog = null;
 
                         // Aplica o Retorno da API no objeto publico
                         strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
@@ -772,7 +786,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                     0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                     0, 0, pedidoCatalogo, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                      "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
@@ -796,7 +810,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
                     // Gera Log com o retorno da API
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
-                                     0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
+                                     0, (int)response.StatusCode, "", null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
                                      "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
@@ -813,6 +827,13 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         {
                             retornoAPI = (RetornoAPIModel.ConsultaPedidoCatalogo.Arquivo)serializer.Deserialize(reader);
                         }
+
+                        // Gera Log com o retorno da API
+                        objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
+                                         0, (int)response.StatusCode, retornoAPI, null, "Retorno da Chamada a API Rest Serializado - Método " + Mod_Gerais.MethodName(),
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
+                        objLog.GravaLog();
+                        objLog = null;
 
                         // Aplica o Retorno da API no objeto publico
                         strRetornoWS = JsonConvert.SerializeObject(retornoAPI);
