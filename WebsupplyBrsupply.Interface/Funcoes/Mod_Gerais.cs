@@ -123,14 +123,14 @@ namespace WebsupplyBrsupply.Interface.Funcoes
             string strSOAP;
             MemoryStream MemStream;
             StreamWriter TextoWriter;
-            StringBuilder StrBuilder;
+            System.Text.StringBuilder StrBuilder;
             System.Xml.Serialization.XmlSerializer Serializer;
             StreamReader strReader;
             try
             {
                 MemStream = new MemoryStream();
-                TextoWriter = new StreamWriter(MemStream, Encoding.UTF8);
-                StrBuilder = new StringBuilder();
+                TextoWriter = new StreamWriter(MemStream, System.Text.Encoding.UTF8);
+                StrBuilder = new System.Text.StringBuilder();
                 Serializer = new System.Xml.Serialization.XmlSerializer(objSerializer.GetType());
                 Serializer.Serialize(TextoWriter, objSerializer);
                 MemStream.Position = 0;
@@ -149,6 +149,7 @@ namespace WebsupplyBrsupply.Interface.Funcoes
             }
             return strSOAP;
         }
+
         public static bool ValidaCampos(object _tpTipo, ref ArrayList _arrErros, bool _bllClass = true)
         {
             bool _objRetorno = true;

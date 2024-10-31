@@ -32,6 +32,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
             // Paramêtros de Controle da Classe
             public string strAmbiente = null;
+            public int intCodOrigem = 0;
             public int intCodPedCatWebsupply = 0;
             public string strCodPedCatBrSupply = string.Empty;
             public string strRetornoWS = string.Empty;
@@ -54,6 +55,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 bool retorno = false;
                 Class_Log_Brsupply objLog;
 
+                string ChaveLocal = intCodPedCatWebsupply.ToString();
+                string ChaveRemota = intCodOrigem.ToString();
+
                 try
                 {
                     // Cria o Cliente Http
@@ -62,7 +66,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, "", null, "Inicio do Método " + Mod_Gerais.MethodName(),
-                                     "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -72,7 +76,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     {
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                            1, -1, "", null, "Erro ao recuperar dados do serviço",
-                                                           "", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                                           "", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
                         strMensagem = "Erro ao recuperar dados do serviço";
@@ -171,7 +175,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             // Gera Log
                             objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                              0, 0, "", null, strMensagem,
-                                             "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                             "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                             objLog.GravaLog();
                             objLog = null;
 
@@ -215,7 +219,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -239,7 +243,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log com o retorno da API
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -268,7 +272,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                                 // Gera Log
                                 objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                  0, (int)response.StatusCode, "", null, strMensagem,
-                                                 "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                                 "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                                 objLog.GravaLog();
                                 objLog = null;
 
@@ -285,7 +289,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             // Gera Log
                             objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                              0, 0, "", null, strMensagem,
-                                             "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                             "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                             objLog.GravaLog();
                             objLog = null;
 
@@ -300,7 +304,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             // Gera Log
                             objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                              0, (int)response.StatusCode, "", null, strMensagem,
-                                             "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                             "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                             objLog.GravaLog();
                             objLog = null;
 
@@ -315,7 +319,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -333,7 +337,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      1, -1, JsonConvert.SerializeObject(excepetionEstruturada), null, strMensagem,
-                                     "L", intCodPedCatWebsupply.ToString(), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -355,6 +359,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
             // Paramêtros de Controle da Classe
             public string strAmbiente = null;
+            public int intCodOrigem = 0;
             public string strCodPedCatWebsupply = string.Empty;
             public string strCodPedCatBrSupply = string.Empty;
             public string strMotivoCancelamento = string.Empty;
@@ -378,6 +383,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 bool retorno = false;
                 Class_Log_Brsupply objLog;
 
+                string ChaveLocal = strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString();
+                string ChaveRemota = intCodOrigem.ToString();
+
                 try
                 {
                     // Cria o Cliente Http
@@ -386,7 +394,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, "", null, "Inicio do Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -396,7 +404,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     {
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                            1, -1, "", null, "Erro ao recuperar dados do serviço",
-                                                           "", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                                           "", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
                         strMensagem = "Erro ao recuperar dados do serviço";
@@ -429,7 +437,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -445,7 +453,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -461,7 +469,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -505,7 +513,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -529,7 +537,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log com o retorno da API
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -558,7 +566,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                             // Gera Log
                             objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                              0, (int)response.StatusCode, "", null, strMensagem,
-                                             "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                             "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                             objLog.GravaLog();
                             objLog = null;
 
@@ -574,7 +582,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -589,7 +597,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, (int)response.StatusCode, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -607,7 +615,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      1, -1, JsonConvert.SerializeObject(excepetionEstruturada), null, strMensagem,
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -629,6 +637,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
 
             // Paramêtros de Controle da Classe
             public string strAmbiente = null;
+            public int intCodOrigem = 0;
             public string strCodPedCatWebsupply = string.Empty;
             public string strCodPedCatBrSupply = string.Empty;
             public string strRetornoWS = string.Empty;
@@ -651,6 +660,9 @@ namespace WebsupplyBrsupply.Interface.Metodos
                 bool retorno = false;
                 Class_Log_Brsupply objLog;
 
+                string ChaveLocal = strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString();
+                string ChaveRemota = intCodOrigem.ToString();
+
                 try
                 {
                     // Cria o Cliente Http
@@ -659,7 +671,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, "", null, "Inicio do Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -669,7 +681,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     {
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                            1, -1, "", null, "Erro ao recuperar dados do serviço",
-                                                           "", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                                           "", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
                         strMensagem = "Erro ao recuperar dados do serviço";
@@ -701,7 +713,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -717,7 +729,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -761,7 +773,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, 0, xmlRequestBody, null, "Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -785,7 +797,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log com o retorno da API
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      0, (int)response.StatusCode, responseBody, null, "Retorno da Chamada a API Rest - Método " + Mod_Gerais.MethodName(),
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
@@ -815,7 +827,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                                 // Gera Log
                                 objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                                  0, (int)response.StatusCode, "", null, strMensagem,
-                                                 "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                                 "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                                 objLog.GravaLog();
                                 objLog = null;
 
@@ -832,7 +844,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, 0, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -847,7 +859,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                         // Gera Log
                         objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                          0, (int)response.StatusCode, "", null, strMensagem,
-                                         "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                         "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                         objLog.GravaLog();
                         objLog = null;
 
@@ -865,7 +877,7 @@ namespace WebsupplyBrsupply.Interface.Metodos
                     // Gera Log
                     objLog = new Class_Log_Brsupply(strIdentificador, intNumTransacao, _intNumServico,
                                      1, -1, JsonConvert.SerializeObject(excepetionEstruturada), null, strMensagem,
-                                     "L", (strCodPedCatWebsupply == string.Empty ? strCodPedCatBrSupply.ToString() : strCodPedCatWebsupply.ToString()), "", Mod_Gerais.MethodName(), strAmbiente);
+                                     "L", ChaveLocal, ChaveRemota, Mod_Gerais.MethodName(), strAmbiente);
                     objLog.GravaLog();
                     objLog = null;
 
